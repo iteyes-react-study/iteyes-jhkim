@@ -10,5 +10,5 @@
 
 ## 📅 일정 
 <summary><strong>📄 2023.11.08 ~ 2023.11.12 (1주차 - 섹션 1. JavaScript 기본)</summary></strong>
-
+<summary><strong>📄 2023.11.13 ~ 2023.11.18 (2주차 - 섹션 2. JavaScript 응용)</summary></strong>
 
