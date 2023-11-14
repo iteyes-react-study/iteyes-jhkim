@@ -9,6 +9,6 @@
 ✔️ React를 활용한 프로젝트 실습하기  </br>
 
 ## 📅 일정 
-<summary><strong>📄 2023.11.08 ~ 2023.11.12 (1주차 - 섹션 1. JavaScript 기본)</summary></strong>
-<summary><strong>📄 2023.11.13 ~ 2023.11.18 (2주차 - 섹션 2. JavaScript 응용)</summary></strong>
+<strong>📄 2023.11.08 ~ 2023.11.12 (1주차 - 섹션 1. JavaScript 기본)</summary></br>
+<strong>📄 2023.11.13 ~ 2023.11.18 (2주차 - 섹션 2. JavaScript 응용)</summary></br>
 
