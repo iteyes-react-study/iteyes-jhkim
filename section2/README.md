@@ -484,7 +484,7 @@ setTimeOut 함수는 자바스크립트 기본 함수로 파라미터로 밀리�
 
 자바스크립트 엔진의 힙 영역은 `변수나 메모리를 저장하는 곳`이고, 콜 스택 영역이 `작성 코드의 실행에 따라 호출 스택이 쌓이는 곳`이다.
 
-그럼 실제 코드가 Call Stack에 어떻게 쌓이는지 확인해보자
+그럼 실제 코드가 `Call Stack`에 어떻게 쌓이는지 확인해보자
 
 ```javascript
 function one(){
@@ -501,7 +501,7 @@ function three() {
 
 console.log(three());
 ```
-상단의 코드는 Call Stack에 아래와 같은 구조로 Call Stack에 쌓임
+상단의 코드는 Call Stack에 아래와 같은 구조로 쌓임
 
 ![img.png](image/자바스크립트엔진그림2.png)
 
@@ -511,7 +511,7 @@ console.log(three());
  `Main Context` 가 최상단에 쌓이고 그 위로 `three() << two() << one()`이  함수 호출 순서대로 쌓임
 
 <br></br>
-Call Stack은 가장 마지막에 들어온 함수부터 수행, 아래 그림은 Call Stack에서 함수가 팝될 때 모습
+`Call Stack`은 가장 마지막에 들어온 함수부터 수행(이름 그대로 Stackd은 LIFO(Last In First Out), 아래 그림은 `Call Stack`에서 함수가 팝될 때 모습
 ![img.png](image/CallStackEscape.png)
 
 one() 함수부터 하나씩 `Call Stack`을 빠져나가면서 자바스크립트 엔진은 동작하며 마지막 `Main Context`가 팝되는 순간 프로그램은 종료된다.
