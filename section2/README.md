@@ -745,8 +745,9 @@ main 함수가 호출되면 처음 "main Start" 가 출력되고 await에 의해
 
 여기선 API가 무엇인지는 이해하고 있다 생각하고 자바스크립트로 `API 호출하는 방법`에 대해 정리하겠다.
 
+<br>
 
-API 호출
+*API 호출 코드*
 ```javascript
 let response = fetch('https://jsonplaceholder.typicode.com/posts');
 
