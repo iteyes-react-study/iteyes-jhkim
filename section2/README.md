@@ -304,9 +304,11 @@ console.log(one,two,three);
 - 비구조화 할당은 앞으로 리액트에서 매우 자주 사용하게 될 개념임
 
 ---
-**6. Spread 연산자** </br>
-객체를 다루는 다른 방법인 **Spread 연산자** </br>
-**✔Spread 개념을 모르는 개발자 코드**</br>
+**6. Spread 연산자** 
+
+객체를 다루는 다른 방법인 **Spread 연산자** 
+
+**✔Spread 적용 전 코드**
 ```javascript
 const cookie = {
     base : "cookie",
