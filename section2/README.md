@@ -245,7 +245,11 @@ let two = arr[1];
 let three =arr[2];
 console.log(one,two,three);
 ```
-일반적으로 배열의 내부 값을 변수에 할당하기 위해선 위와 같은 코드를 작성한다. 하지만 비구조화 할당 개념을 적용하면 한줄의 코드로 끝낼 수 있음, 아래 코드는 동일한 코드
+일반적으로 배열의 내부 값을 변수에 할당하기 위해선 위와 같은 코드를 작성한다. 
+
+<br>
+
+아래 코드와 비교해보자
 
 **✔변수 비구조화 적용 후**
 ```javascript
@@ -257,8 +261,9 @@ console.log(one,two,three) // one two three 출력
 let [one,two,three,four = "four"] = ["one","two","three"]; // four ="four" 형식을 이용해 기본값을 줄 수도 있음
 console.log(one,two,three,four); // one,two,three,four 출력 , 
 ```
-대괄호를 이용해서 배열의 값을 순서대로 할당받아 사용하는 방식을 **배열의 비구조화 할당**이라 함
+비구조화 할당 개념을 적용하면 한줄의 코드로 끝낼 수 있음 
 
+대괄호를 이용해서 배열의 값을 순서대로 할당받아 사용하는 방식을 **배열의 비구조화 할당**이라 함
 
 <br>
 
