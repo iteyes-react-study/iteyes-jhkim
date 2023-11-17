@@ -168,11 +168,10 @@ let person ; // "객체가 아닙니다.";  or {name : "김준현"}; // 두 케�
 const name = getName(person);
 console.log(person); // "객체가 아닙니다." or "김준현"
 ```
-`단락회로 평가`를 사용하지 않았을 때, 만약 위 코드에 person 값에 undefined담겼을 때 person.name에 접근 시 에러 발생 
+`단락회로 평가`를 사용하지 않았을 때, 만약 위 코드 person 객체 값이 undefined가 들어온 경우 person.name 접근 시 에러가 발생한다.
 
-<br> 
+하지만 `&&` 단락회로 평가와 `truthy & falsy` 속성을 활용해서 아래와 같은 순서로 동작 
 
-하지만 `&&` 단락회로 평가와 `truthy & falsy` 속성을 활용하면 위 코드는 아래와 같은 순서로 동작 
 1. person의 값은 undefined(falsy) 속성을 갖게 되어 name의 값엔 undefined가 할당
 2. return 문에선 || 연산자로 인해 뒷 문자열인 "객체가 아닙니다." 가 리턴(truthy 속성)  
 3. 최종 "객체가 아닙니다"가 출력
