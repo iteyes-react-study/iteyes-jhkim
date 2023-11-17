@@ -510,11 +510,15 @@ console.log(three());
 
  `Main Context` 가 최상단에 쌓이고 그 위로 `three() << two() << one()`이  함수 호출 순서대로 쌓임
 
-<br></br>
-`Call Stack`은 가장 마지막에 들어온 함수부터 수행(이름 그대로 Stackd은 LIFO(Last In First Out), 아래 그림은 `Call Stack`에서 함수가 팝될 때 모습
+<br>
+
+아래 그림은 `Call Stack`에서 함수가 팝되는 모습
+
 ![img.png](image/CallStackEscape.png)
 
-one() 함수부터 하나씩 `Call Stack`을 빠져나가면서 자바스크립트 엔진은 동작하며 마지막 `Main Context`가 팝되는 순간 프로그램은 종료된다.
+`Call Stack`은 가장 마지막에 들어온 함수부터 수행(이름 그대로 Stackd은 LIFO(Last In First Out) 된다.
+
+그러므로 one() 함수부터 하나씩 `Call Stack`을 빠져나가면서 자바스크립트 엔진은 동작하며 마지막 `Main Context`가 팝되는 순간 프로그램은 종료된다.
 
 우리가 그 때 보는 자바스크립트의 결과 화면은 아래와 같다.
 
