@@ -670,7 +670,7 @@ taskA(5,1).then((a_res) => {
 
 ---
 
-**9.async & wait**
+**9. async & wait**
 
 `Promise`를 더 쉽고 가독성있게 작성할 수 있게 도와주는 기능
 
