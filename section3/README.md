@@ -48,7 +48,7 @@ Node.js는 오픈 소스 및 크로스 플랫폼 **JavaScript 런타임 환경�
 
 **자바스크립트 엔진의 종류**
 
-![Untitled](image/자바스크립트엔진종류.png)
+![자바스크립트 엔진 종류](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%94%EC%A7%84%EC%A2%85%EB%A5%98.png)
 
 - 브라우저마다 같은 엔진을 쓰는게 아닌 자기들만의 엔진을 사용한다.
 - 크롬 브라우저가 가진 **V8**이 가장 자바스크립트의 대표적인 엔진이다.
@@ -76,9 +76,9 @@ Node js는 언어가 아닌 자바스크립트를 웹 브라우저가 아닌 독
 
 VSCODE로 편집한 index.js 파일을 Node로 파일을 실행시키기 위해선 GUI 방식도 가능하지만 NODE 만으로는 실행시킬 수 없으며 일반적으로 터미널 환경에서 CLI 방식을 사용한다. 
 
-NODE 실행 결과
+*NODE 실행 결과*
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/aba873f7-adb4-4873-b283-4597edcdc2c9/900666d2-5307-4535-aee2-6791c6ca6cbc/Untitled.png)
+![실행 결과1](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(2).png)
 
 자바스크립트 파일을 NODE 환경에서 실행한 결과이다.
 
@@ -118,9 +118,9 @@ console.log(calc);
 
 `moduel.exports` 그리고 `require` 은 노드의 내장 함수이기 때문에 일반 자바스크립트 코드에선 사용할 수 없다.
 
-아래는 실행 결과 그림
+*실행 결과 그림*
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/aba873f7-adb4-4873-b283-4597edcdc2c9/3dd213ee-dd18-4b56-83e4-9ea28241eaae/Untitled.png)
+![Untitled](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(3).png)
 
 `node [파밀명]` : node 런타임 환경에서 실행시키는 명령어
 
@@ -252,9 +252,9 @@ console.log(color3);
 
 추가한 의존성은 따로 경로를 지정 없이 설치한 의존성 명을 입력해 바로 사용할 수 있음
 
-출력 결과
+*출력 결과*
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/aba873f7-adb4-4873-b283-4597edcdc2c9/778d3753-c758-45f0-89c6-4a78610ad814/Untitled.png)
+![실행결과4](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(4).png)
 
 `npm start [파일명]` 명령어를 사용해 실행시켰고, 정상 출력된 모습이다.
 
