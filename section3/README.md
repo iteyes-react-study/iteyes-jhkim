@@ -3,13 +3,13 @@
 
 [🔭WHAT IS THE Node](https://nodejs.org/en/learn)
 
-리액트 강의에 본격적으로 들어가기 Node.js 기초를 정리한 내용
+Node.js 는 오픈 소스 및 크로스 플랫폼 JavaScript 런타임 환경이다.
 
 <br>
 
 ## **실행환경**
 
-3챕터부터는 Node.js 설치가 필요하고 VsCode와 Terminal을 사용해 실습
+3챕터부터는 Node.js 설치가 필요하고 VSCode와 Terminal을 사용해 실습
 
 - Node.js(v18.18.2)
     - cmd에서 node -v
