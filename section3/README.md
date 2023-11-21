@@ -16,6 +16,8 @@
     - cmd 환경에서 사용
 - Javasciprt 코드 생성 VSCode
 
+<br>
+
 ## 목차
 
 3챕터에 다룰 내용은 아래와 같다.
@@ -59,7 +61,7 @@ Node.js는 오픈 소스 및 크로스 플랫폼 **JavaScript 런타임 환경�
 
 결론부터 말하면 리액트는 Node.js를 기반으로 사용할 수 있는 기술이기 때문이다. 
 
-또한 리액트를 사용해서 만든 자바스크립트 파일들로 좋은 기능을 만들 수 있고 이는 Node.js를 기반으로 만들 수 있기 때문에 본 React 강의 이전에 자바스크립트와 Node에 대한 기본 개념이 필수적이다 할 수 있다.
+또한 리액트를 사용해서 만든 자바스크립트 파일들로 좋은 기능을 만들 수 있고 이는 Node.js를 기반으로 만들 수 있기 때문에 본 React 강의 이전에 자바스크립트와 Node에 대한 기본 개념이 필수적이다.
 
 <br>
 
@@ -76,17 +78,22 @@ Node js는 언어가 아닌 자바스크립트를 웹 브라우저가 아닌 독
 
 VSCODE로 편집한 index.js 파일을 Node로 파일을 실행시키기 위해선 GUI 방식도 가능하지만 NODE 만으로는 실행시킬 수 없으며 일반적으로 터미널 환경에서 CLI 방식을 사용한다. 
 
+<br>
+
 *NODE 실행 결과*
 
 ![실행 결과1](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(2).png)
 
 자바스크립트 파일을 NODE 환경에서 실행한 결과이다.
 
+<br>
+
 **모듈 분리하기**
 
 자바스크립트도 하나의 파일에 모든 기능을 넣을 수는 없다. 
 
 노드에선 파일을 어떻게 분리해서 외부에서 사용할 수 있는지 보자
+
 
 *모듈 내보내기*
 
@@ -118,11 +125,15 @@ console.log(calc);
 
 `moduel.exports` 그리고 `require` 은 노드의 내장 함수이기 때문에 일반 자바스크립트 코드에선 사용할 수 없다.
 
+<br>
+
 *실행 결과 그림*
 
 ![Untitled](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(3).png)
 
 `node [파밀명]` : node 런타임 환경에서 실행시키는 명령어
+
+<br>
 
 **정리**
 
@@ -165,9 +176,11 @@ console.log(calc);
 
 `dependencies` : 어떤 버전의 외부 패키지를 사용했는지 알 수 있음(^의 의미는 명시된 버전 이상의 버전 이상으로만 설치가 진행이 된다는 의미)
 
+<br>
+
 *의존성 추가 방법*
 
-1. [**npm.js](https://www.npmjs.com/)** 사이트 접속
+1. [🔗npm.js](https://www.npmjs.com/) 사이트 접속
 
 ✅ *npms.js*? 
 
@@ -175,11 +188,12 @@ console.log(calc);
 
 → 다른 사람이 만들어 놓은 유용한 기능의 모듈을 사용할 수 있다.
 
-1. 추가하고 싶은 의존성 검색
+
+2. 추가하고 싶은 의존성 검색
 
 : 추가하고 싶은 의존성을 검색한다.
 
-1. 찾은 모듈을 클릭하면 오른쪽 Install에 명시된 명령어를 입력한다.
+3. 찾은 모듈을 클릭하면 오른쪽 Install에 명시된 명령어를 입력한다.
 
 `npm i [name]  OR  npm install [nmae]`  : 의존성 설치 명령어
 
@@ -197,7 +211,7 @@ console.log(calc);
 
 `randomcolor` : randomcolor 의존성을 추가했고 ^의 의미는 명시된 버전 이상의 버전 이상으로만 설치가 진행된다는 의미
 
-1. `package-lock.json`  신규 생성
+2. `package-lock.json`  신규 생성
 
 *package-lock.json 파일 예시*
 
@@ -233,9 +247,9 @@ console.log(calc);
 | 신규 의존성을 설치하면 해당 파일은 업데이트 된다. | 신규 의존성 설치 시 정확한 의존성 버전이 명시된다. |
 | 정확한 의존성 버전이나 해시 등은 기록되지 않아, 여러 개발자가 프로젝트를 클론하고 npm install 입력 시, 모두 같은 의존성 버전을 얻을 수는 없다.  | 프로젝트를 공유하거나 배포할 때, package-lock.json 파일을 함께 제공한다면 의존성 버전을 동일하게 유지할 수 있음  |
 
-1. 신규 의존성 사용 가능
+3. 신규 의존성 사용 가능
 
-의존성 사용하기
+*의존성 사용하기*
 
 ```jsx
 // npm i 를 통해 다운받은 파일은 따로 경로를 지정해주지 않아도 된다.
@@ -251,6 +265,7 @@ console.log(color3);
 ```
 
 추가한 의존성은 따로 경로를 지정 없이 설치한 의존성 명을 입력해 바로 사용할 수 있음
+
 
 *출력 결과*
 
