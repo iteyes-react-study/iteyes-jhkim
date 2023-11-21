@@ -36,7 +36,7 @@ Node.js는 오픈 소스 및 크로스 플랫폼 **JavaScript 런타임 환경�
 
 자바스크립트는 원래 브라우저 환경에서만 실행할 수 있다는 한계가 있었는데 쉽고 편리한 자바스크립트 엔진을 독립적으로 실행시키고 싶었고 이를 해결한 프로젝트의 이름이 **Node.js**
 
-: 자바스크립트를 브라우저가 아닌 어디에서도 실행 가능하게 한 런타임 환경이 **Node.js**
+: 자바스크립트를 브라우저가 아닌 어디에서도 실행 가능한 런타임 환경이 바로 **Node.js**
 
 : Node.js 의 엔진은 Chrome의 V8 엔진
 
@@ -80,11 +80,13 @@ VSCODE로 편집한 index.js 파일을 Node로 파일을 실행시키기 위해�
 
 <br>
 
+실행 명령어는 `Node [파일명]` 이다
+
 *NODE 실행 결과*
 
 ![실행 결과1](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section3/%20image/NODE%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC(2).png)
 
-자바스크립트 파일을 NODE 환경에서 실행한 결과이다.
+자바스크립트 파일을 Node 환경[= V8 엔진 환경]에서 실행한 결과이다.
 
 <br>
 
