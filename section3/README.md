@@ -3,7 +3,9 @@
 
 [🔭 노드 공식 문서](https://nodejs.org/en/learn)
 
-Node.js 는 오픈 소스 및 크로스 플랫폼 JavaScript 런타임 환경이다.
+3강부터는 Node js에 대한 내용이 나온다. 
+
+React를 본격적으로 들어가기 이전에 알아야하는 노드 개념을 정리해놓은 챕터이다.
 
 <br>
 
