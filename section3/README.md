@@ -1,7 +1,7 @@
 
 # ✏**Node js 기초**
 
-[🔭WHAT IS THE Node](https://nodejs.org/en/learn)
+[🔭 노드 공식 문서](https://nodejs.org/en/learn)
 
 Node.js 는 오픈 소스 및 크로스 플랫폼 JavaScript 런타임 환경이다.
 
@@ -190,10 +190,13 @@ console.log(calc);
 
 → 다른 사람이 만들어 놓은 유용한 기능의 모듈을 사용할 수 있다.
 
+<br>
 
 2. 추가하고 싶은 의존성 검색
 
 : 추가하고 싶은 의존성을 검색한다.
+
+<br> 
 
 3. 찾은 모듈을 클릭하면 오른쪽 Install에 명시된 명령어를 입력한다.
 
