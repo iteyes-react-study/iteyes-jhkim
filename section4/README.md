@@ -1,6 +1,6 @@
 # React.js 기초
 [한입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard)
-**4. React.js 기초** 강의와 [React 문서](https://react.dev/learn)를 보고 정리한 내용입니다.
+**[4. React.js 기초]** 강의와 [React 문서](https://react.dev/learn)를 보고 정리한 내용입니다.
 
 <br>
 
@@ -16,10 +16,7 @@
 
 ✅[DOM](https://www.taniarascia.com/introduction-to-the-dom/)에 대한 기본 이해
 
-
 본 강의에선 <U>JavaScipt</U>에 대한 내용을 1강과 2강에서 Node.js와 npm을 3강에서 학습했다.
-
-<U>DOM</U>에 대한 내용은 본 강의에서 다루지 않기 때문에 위 링크와 구글링을 통해 학습하고 넘어가자
 
 <br>
 
@@ -31,8 +28,6 @@
 3. JSX
 4. State
 5. Props
-
-개인적으로 React 내용을 다루기 이전에 학습하는지 알려주는 내용이 1강에 있는점이 좋았다.
 
 
 <br>
@@ -69,8 +64,11 @@
 <br>
 
 3. Virtudal Dom
+- Virtual Dom을 사용해 기존 Dom보다 우수한 성능을 보여준다.
 
-브라우저가 HTML 코드를 해석하는 과정
+<br>
+
+*브라우저가 HTML 코드를 해석하는 그림*
 ![DOM 그림](image/dom그림.png)
 <U>DOM(Document Object Model)</U> 이란 문서 객체 모델이란 뜻이며, 브라우저가 HTML을 해석할 수 있게 `Tree 형태로 변환시켜 놓은 객체`
 
@@ -80,8 +78,7 @@
 
 <br>
 
-
-위 내용은 <U>React를 배워야하는 이유</U>이면서 동시에 React가 갖는 장점
+=> <U>React를 배워야하는 이유</U>
 
 **정리**
 - React는 기존 프론트 개발의 단점을 보완한 라이브러리이다.
@@ -92,9 +89,11 @@
 
 ***2.React App***
 
-실제 본격적으로 React App을 생성하는 챕터
+실제 본격적으로 **React App**을 생성하는 챕터
 
-아래는 React App에 핵심적인 라이브러리 몇개만 정리하겠음
+아래는**React App**에 핵심적인 라이브러리 몇개만 정리하겠음
+
+<br>
 
 ✔️ React.js
 
@@ -321,13 +320,9 @@ const [count, setCount] = useState(initialValue);
 ...
 }
 ```
-App.js 에서 counterProps라는 객체를 ***Spread***를 활용해 전달했고 
+App.js 에서 counterProps라는 객체를 ***Spread***를 활용해 전달했고 Counter.js에선 ***비구조화 할당***을 통해 값을 받을 수 있다.
 
-Counter.js에선 ***비구조화 할당***을 통해 값을 받을 수 있습니다.
-
-이를 활용해 전달받은 데이터로 새로운 기능을 처리 할 수 있다.
-
-또한 데이터뿐만 아니라 컴포넌트 자체를 다른 컴포넌트의 Props로 전달 할 수도 있음
+이를 활용해 전달받은 데이터로 새로운 기능을 처리 할 수 있고 이뿐만 아니라 컴포넌트 자체를 다른 컴포넌트의 Props로 전달 할 수도 있음
 
 
 <br>
