@@ -1,7 +1,7 @@
 
-# ✏**React 학습 내용 정리**
+# ✏**React 내용 정리**
 
-## 📚 구성 
+## 목차
 강의 링크 : [인프런 Click](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8) </br>
 챕터별 요약 정리본은 아래 README.MD 파일에 저장되어 있으며 소스는 실습파일 폴더안에 있습니다.
 
@@ -16,6 +16,8 @@
 ## [5장 - React 기본 - 간단한 일기장 프로젝트](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section5/README.md)
 
 ## [6장 - React 실전 프로젝트 - 감정 일기장 만들기](https://github.com/iteyes-react-study/iteyes-jhkim/blob/main/section6/README.md)
+
+<br>
 
 ## 📅 일정 
 <strong> 📄 2023.11.08 ~ 2023.11.12 (1주차 - 1. JavaScript 기본)</summary></br>
