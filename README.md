@@ -24,3 +24,4 @@
 <strong> 📄 2023.11.13 ~ 2023.11.18 (2주차 - 2. JavaScript 응용)</summary></br>
 <strong> 📄 2023.11.20 ~ 2023.11.24 (3주차 - 3. Node.js 기초)</summary></br>
 <strong> 📄 2023.11.27 ~ 2023.11.30 (4주차 - 4. React.js 기초)</summary></br>
+<strong> 📄 2023.12.04 ~ 2023.12.08 (5주차 - 5. 일기장 만들기 )</summary></br>
