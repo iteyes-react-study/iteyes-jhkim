@@ -71,11 +71,20 @@ function App() {
     setData(afterDeleteDiaryList);
   }
 
+  const onUpdate = (targetId,updateContent) => {
+    setData(
+      // 삼항연산자 사용, 수정 대상이라면 새로운 콘텐츠로 업데이트하고 그렇지 않다면 기존 배열을 가져온 배열을 세팅 후 최종 배열 세팅한다.
+      data.map((it) => 
+        it.id === targetId ? {...it, content:updateContent}: it 
+      )
+    );
+  };
+
   return (
     <div className="App">
       <h2>일기장</h2>
       <DiaryEditor onCreate={onCreate}/>
-      <DiaryList onRemove={onRemove} diaryList={data}/>
+      <DiaryList onUpdate={onUpdate} onRemove={onRemove} diaryList={data}/>
     </div>
   );
 }

@@ -3,9 +3,8 @@ import DiaryItem from './DiaryItem.js';
 
 // if undefined가 내려온다면
 // 에러가 발생, default props를 설정해 에러를 방지한다.
-const DiaryList = ({onRemove,diaryList}) => {
+const DiaryList = ({onRemove,diaryList, onUpdate}) => {
     console.log(diaryList);
-
 
     return (
         // 데이터의 고유한 id를 설정하지 않으면 에러가 발생한다.
@@ -15,7 +14,7 @@ const DiaryList = ({onRemove,diaryList}) => {
             <h4> {diaryList.length}개의 일기가 있습니다.</h4>
             <div>
                 {diaryList.map((it) => (
-                    <DiaryItem key ={it.id}{...it} onRemove = {onRemove}/>
+                    <DiaryItem key ={it.id}{...it} onRemove = {onRemove} onUpdate={onUpdate}/>
                 ))}
             </div>
         </div>

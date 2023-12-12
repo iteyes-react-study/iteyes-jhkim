@@ -147,6 +147,7 @@ const handleSubmit = () => {
 
 `Data` 의 상태가 변화하고 하위 컴포넌트인 `diaryList` 리랜더링 되어 데이터가 추가되는것이다.
 
+</br>
 
 ---
 
@@ -175,7 +176,7 @@ const handleSubmit = () => {
             if(window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)){
                     onDelete(id);
             }
-        }}> 
+        }> 
         삭제하기 
         </button>
 ```
@@ -195,7 +196,7 @@ const handleSubmit = () => {
                     <DiaryItem key ={it.id}{...it} onDelete = {onDelete}/>
                 ))}
             </div>
-        </div>
+    )
 ```
  
 `DiaryItem`의 코드를 보면 페이지 하단에 위와 같이 삭제하기 버튼을 추가했다.
@@ -213,3 +214,141 @@ const handleSubmit = () => {
 4. 배열의 내장함수 `filter` 를 이용해 파라미터로 받은 data 배열을 제외한 신규 배열 정보를 다시 setData 상태로 업데이트 시킨다.
 
 
+---
+
+*** 데이터 수정 프로세스 ***
+
+데이터는 위에서 아래로, 이벤트는 아래에서 위로를 생각해야한다.
+
+<U> App.jsx </U>
+
+```jsx
+  const onUpdate = (targetId,updateContent) => {
+    setData(
+      // 삼항연산자 사용, 수정 대상이라면 새로운 콘텐츠로 업데이트하고 그렇지 않다면 기존 배열을 가져온 배열을 세팅 후 최종 배열 세팅한다.
+      data.map((it) => 
+        it.id === targetId ? {...it, content:updateContent}: it 
+      )
+    );
+  };
+
+```
+
+최상위 컴포넌트에선 위와 같이 update기능에 실제 내릴 date를 처리한다.
+
+앞서 삭제에서 `filter`를 사용한것과 달리 배열의 내장함수 `map`을 사용해 데이터를 처리했다.
+
+</br>
+
+✔️ filter
+
+주어진 함수의 조건을 만족하는 배열의 요소들로 새로운 배열을 생성한다.
+
+</br>
+
+✔️ map
+
+배열의 각 요소에 대해 주어진 함수를 호출하고, 각 호출의 결과를 모아 새로운 배열을 생성한다.
+
+단순히 배열의 각 요소를 수정을 하려 한다면 `map` 을 사용하고, 특정 조건을 만족하는 요소를 걸러내고자 한다면 `filter`를 사용한다.
+
+
+<U> DiaryList.js </U>
+
+```jsx
+        <div className ="DiaryList">
+            <h2>일기 리스트</h2>
+            <h4> {diaryList.length}개의 일기가 있습니다.</h4>
+            <div>
+                {diaryList.map((it) => (
+                    <DiaryItem key ={it.id}{...it} onRemove = {onRemove} onUpdate={onUpdate}/>
+                ))}
+            </div>
+        </div>
+
+```
+최상위 컴포넌트 `App.js`에서 `Props`로 전달받은 `onUpdate` 함수를 다시 `DiaryItem` 컴포넌트에 전달한다.
+
+
+
+<U> DiaryItem.js </U>
+
+```jsx
+
+    const [isEdit, setIsEdit] = useState(false);
+    
+    // 반전연산, isEdit가 true일때 수정할 수 있도록 처리한다.
+    const toggleIsEdit = () => {
+        setIsEdit(!isEdit);
+    }
+    ...
+    <div className="content">
+    {isEdit ? (
+            <>
+              <textarea ref={localContentInput} 
+              value={localContent}
+              onChange={(e) => 
+                {
+                setLocalContent(e.target.value)}}
+              />
+            </>
+        )   : (
+            <> {content} </>
+        )}     
+    </div>
+    ...
+    {isEdit ? (
+        <>
+        <button onClick={handleQuitEdit}> 수정 취소 </button>
+        <button onClick={handleCompleteEdit}>수정 완료</button>
+        </>
+    ) : ( 
+        <>
+        <button onClick={handleRemove}>삭제하기 </button>
+        <button onClick={toggleIsEdit}>수정하기</button>
+        </>
+    )}
+    ...
+    const handleCompleteEdit = () => {
+    const fixId = (`${id}` === "0") ? 1 : `${id}`;
+    if(localContent.length < 5) {
+        localContentInput.current.focus();
+        return;
+    }
+
+    if(window.confirm(`${fixId}번째 일기를 수정하시겠습니까?`)){
+        setIsEdit(false);
+        onUpdate(id,localContent);
+    }
+}
+```
+
+`isEdit`라는 state 변수를 사용해 `setIsEdit` 를 활용해 변수값을 수정할 수 있게 했고 수정 여부를 판단할 수 있게 했다.
+
+수정하기를 누르면 위 상태를 변화시켜 button 내용을 동적으로 변화 시킬수 있게 했고 `textarea`영역에 값을 입력할 수 있는 폼을 추가 시켰다.
+
+</br>
+
+<U>handleCompleteEdit</U>
+
+
+```jsx
+    const handleCompleteEdit = () => {
+        const fixId = (`${id}` === "0") ? 1 : `${id}`;
+        if(localContent.length < 5) {
+            localContentInput.current.focus();
+            return;
+        }
+
+        if(window.confirm(`${fixId}번째 일기를 수정하시겠습니까?`)){
+            setIsEdit(false);
+            onUpdate(id,localContent);
+        }
+    }
+```
+
+수정완료를 누르면 기존 textarea를 검증했듯이 동일하게 포커스를 사용했고 onUpdate 이벤트를 다시 상위 컴포넌트로 보내 데이터를 업데이트 할 수 있도록 했다.
+
+---
+
+## 7.React Lifecycle 제어하기
