@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import './App.css';
 
 const DiaryEditor =  ({onCreate}) =>{
-    
+
     const authorInput = useRef();
     const contentInput = useRef();
 
@@ -87,4 +87,4 @@ const DiaryEditor =  ({onCreate}) =>{
     </div>;
 }
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);

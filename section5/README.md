@@ -352,3 +352,381 @@ const handleSubmit = () => {
 ---
 
 ## 7.React Lifecycle 제어하기
+
+✔️ Lifecycle?
+
+React 컴포넌트의 생애 주기(생명주기)
+
+
+>탄생(화면에 나타나는 것 Mount) -> 변화(리렌더, Update) -> 죽음(화면에 사라짐, UnMount)
+
+LifeCycle을 제어한다는것은 컴포넌트의 탄생부터 시작해서 스테이트나 프롭이 바뀌게 되어 일어나느 이런 업데이트나 변화를 거쳐 끝으론 죽음에 이르는 과정을 다루는것을 의미한다.
+
+</br>
+
+✔️ React Hooks
+
+함수형 컴포넌트에서 클래스형 컴포넌트의 기능을 낚아채듯이 훔쳐와서 사용할 수 있는 기능
+
+</br>
+
+✔️ useEffect
+``` jsx
+useEffect (() => {
+    // todo... callback 함수
+}, []) // Dependency Array(의존성 배열), 이 배열 내에 들어있는 값이 변화하면 콜백 함수가 수행된다.
+
+```
+
+***컴포넌트 Mount 제어***
+
+``` jsx
+    useEffect(() => {
+        console.log("Mount!!!");
+    } ,[]) 
+```
+
+최초 랜더링 될때의 생명주기를 감지하고 이를 제어한다. 파라미터로 빈 배열을 전달한다는것은 최초 한번 특정 작업을 수행하고자 할때 사용한다. 
+
+최초 한번만 실행되므로 불필요한 랜더링이 발생하지 않고 성능을 최적화 할 수 있다.
+
+</br>
+
+***컴포넌트 Update 제어***
+
+``` jsx
+    const [count,setCount] = useState(0);
+
+    useEffect(() => {
+        console.log("update"); // 컴포넌트의 변경 감지
+    })
+
+    useEffect(() => {
+        console.log(`count is update : ${count}`);
+        if(count > 5){
+            alert(`count가 5를 넘었습니다. 따라서 1로 초기화합니다.`);
+            setCount(1);
+        }
+    },[count]); // count state의 변경 감지
+```
+
+의존성 배열로 아무정보도 전달하지 않으면 해당 컴포넌트의 변경을 감지한다.
+
+특정 state의 변경을 감지하고 처리하기 위해선 파라미터로 state 지정해서 사용할 수 있다.
+
+예시코드는 count의 상태가 5가 넘었을 경우 alert를 보여주고 다시 1로 상태를 변경하게 했다.
+
+</br>
+
+***컴포넌트 UnMount 제어***
+
+```jsx
+    useEffect(() => {
+      console.log("Mount !!");
+  
+      // Cleanup function
+      return () => {
+        console.log("Unmount !!");
+      };
+    }, []); // 빈 배열이므로 컴포넌트가 마운트되었을 때만 실행
+```
+
+</br>
+
+---
+## 8.React에서 API 호출하기
+
+***<U> API 호출 예제</U>***
+
+```jsx
+  const getData = async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/comments")
+            .then((res) => res.json());
+    
+    const initData = res.slice(0,5).map((it) => {
+        return {
+          author : it.email,
+          content : it.body,
+          emotion : Math.floor(Math.random() * 5) +1,
+          create_date : new Date().getTime(),
+          id : dataId.current++
+      }
+    })
+
+    setData(initData);
+  };
+
+  // 최초 랜더링 되었을떄 한번 실행
+  useEffect(() => {
+    getData();
+  },[]
+
+```
+
+1. https://jsonplaceholder.typicode.com/comments 호출을 위해 자바스크립트 내장 API 호출 함수 `fetch` 사용
+
+2. 응답을 받은 후 처리 하기 위한 동기 키워드 `async`와 `await`사용
+
+3. 많은 응답 중 5개만 가져오기 위해 slice 사용, map을 사용해 state 변수에 값 할당
+
+4. 할당한 변수 initData를 setData에 할당
+
+5. 최초 랜더링 된 mount 시점에 실행시키기 위해 `useEffect` 사용
+
+
+---
+
+## 10. useMemo
+
+가장 많이 하는 실수 
+
+✔️ useMemo
+
+연산을 최적화하기 위해 메모이제이션 기능을 제공하는 리액트 함수
+
+어떤 함수가 있고 그 함수가 어떤 값을 리턴하고 있는데 그 리턴까지의 연산을 최적화하고 싶다면 어떤 dependency array에 의해 최적화할지만 정해주면 
+
+연산 및 호출을 최적화 할 수 있다.
+
+</br>
+
+***useMemo 많이 하는 실수***
+```
+getDiaryAnalysis is not a function
+TypeError: getDiaryAnalysis is not a function
+```
+
+`useMemo`로 함수를 감싸고 dependency array를 전달하면 더이상 전달한 함수는 더이상 함수가 아니다.
+
+던지고 나면 응답값으로 콜백함수가 아닌 값을 전달받게 된다.
+
+그러므로 함수가 아닌 값으로 처리한다.
+
+---
+
+## 11. React.memo
+
+함수형 컴포넌트에 업데이트 조건을 거는 기능
+
+필요한 부분에 대해서만 랜더링 하고 연산의 낭비를 막기 위한 기능
+
+
+``` jsx
+const TextView = React.memo(({ text }) => {
+    useEffect(()=> {
+        console.log(`Update ::  TEXT : ${text}`);
+    })
+    return <div>{text}</div>;
+});
+
+const CountView = React.memo(({ count }) => {
+    useEffect(()=> {
+        console.log(`Update ::  count : ${count}`);
+    })
+    return <div>{count}</div>;
+})
+```
+
+원래라면 useEffect는 해당 컴포넌트에서의 state가 바뀔떄마다 리랜더링 된다.
+
+하지만 `React.memo`를 사용하면 고차 컴포넌트로 반환받게 된다. 고차 컴포넌트로 바뀜으로써 `props`의 변화에만 영향을 받게 할 수 있게한다.
+
+
+**객체의 비교**
+```jsx
+const CounterA = React.memo(({count}) => {
+
+    useEffect(() => {
+        console.log(`CounterA Update - count: ${count}`);
+    })
+
+    return <div>{count}</div>
+})
+
+const CounterB = React.memo(({obj}) => {
+
+    useEffect(() => {
+        console.log(`CounterB update - count : ${obj.count}`);
+    })
+
+    return <div>{obj.count}</div>
+})
+
+const areEqual = (prevProps, nextProps) => {
+    if(prevProps.obj.count === nextProps.obj.count){
+        return true;
+    }
+    return false; // 이전 프롭스와 다음 프롭스가 같다 -> 리랜더링을 일으키지 않는다. , if false => 리랜더링을 일으켜야한다.
+}
+
+```
+obj는 객체이고 자바스크립트에서 객체 비교는 해당 객체가 가지고 있는 주소값으로 비교를 하게 된다.
+
+즉 얕은 비교를 하게 되는데, 이로 인해 객체는 `areEqual` 과 같은 함수를 활용해 내부 값을 비교하지 않으면 실제 내부 값이 변경되지 않더라도
+
+항상 다른 객체로 인식하게 된다.
+
+이를 방지하기 위해 `React.memo` 에선 객체의 비교 함수를 파라미터로 받을 수 있게 했고 실제 객체 내부 값 비교 함수를 생서 후 파라미터로 넘겨주면 
+
+객체에 대해서도 불필요한 리랜더링을 대처 할 수 있다.
+
+---
+
+## 12.  useCallBack
+
+`메모이제이션`된 콜백 함수를 반환 해주는 리액트의 기능(값이 아닌 함수 반환)
+
+</br>
+
+**사용 이유**
+
+리액트의 컴포넌트의 리랜더링의 조건은 본인이 가진 `State`가 변하거나 `Prop`이 변화가 생기는 경우이다.
+
+예제 코드에선 상위 컴포넌트인 App.js에서 다이어리 생성을 위한 콜백함수 `onCreate`를 하위 컴포넌트로 전달했고
+
+이를 전달받은 DiaryEidtor.js 에선 신규 게시글 추가에 대한 처리 이벤트를 다시 App.js에 전달했고
+
+App.js에선 전달받은 파라미터로 신규 데이터를 추가할 수 있게 했다.
+
+
+</br>
+
+하지만 이로인해 앱 컴포넌트가 랜더링 될 때마다 `onCreate` 함수는 계속 다시 만들어져 랜더링이 계속 발생하고 있다.
+
+내용을 삭제하거나 추가할때에도 앱 컴포넌트는 계속 재생성되서 불필요한 리랜더링이 발생하게 된다.
+
+이를 최적화하기 위해선 `useCallBack`을 사용할 수 있고 이전에 처리한 `useMemo` 를 사용할 수 없는 이유는 이 녀석은 함수가 아닌 값을 반환하기 때문에
+
+원본 그대로 하위 컴포넌트로 보내 처리하기 위해선 값이 아니라 콜백 함수 그대로 사용해야한다.
+
+1. 최적화의 시작은 export component를 `export React.memo(Componet)` 
+
+2. 최적화 콜백 함수 추가
+
+``` jsx
+  const onCreate = useCallback(
+    (author, content, emotion) => {
+      const create_date = new Date().getTime();
+
+      const newItem = {
+        author,
+        content,
+        emotion,
+        create_date,
+        id : dataId.current
+      };
+      dataId.current ++; 
+      // 신규 데이터를 가장 앞에 보여주기 위해
+      setData((data) => [newItem, ...data]);
+    },
+    []  
+  )
+```
+---
+## 13. useReducer
+
+리액트에서 상태관리를 돕는 리액트 `Hook`이다
+
+⚡ Hook?
+
+Hook은 함수 컴포넌트에서 React state와 생명주기(lifeCycle feature)를 연동할 수 있게 해주는 함수
+
+***사용 이유***
+
+useReducer를 사용하면 복잡하고 긴 상태 변화 로직을 클래스와 분리해 바깥에서 이를 처리할 수 있게 해준다.
+
+함수안에 코드가 긴것은 결코 좋은 현상이 아님.
+
+
+***사용 방법***
+
+1. const [data,dispatch] = useReducer(reducer, []);  
+
+구조 분해 할당으로 받게되는 데이터와 실제 상태변화 일으키는 dispatch 함수
+
+2. useReducer
+
+*예제 코드*
+
+```jsx
+const reducer = (state,action) => {
+  switch(action.type){
+    case `INIT` : {
+      return action.data;
+    }
+    case `CREATE` : {
+      const created_date = new Date().getTime();
+      const newItem = {
+        ...action.data,
+        created_date,
+      };
+      return [newItem, ...state];
+    }
+
+    case `REMOVE` : {
+      return state.filter((it) => it.id !== action.targetId);
+    }
+
+    case `EDIT`:{
+      return state.map((it) => 
+      it.id === action.targetId ? 
+      {...it, content : action.updateContent} : it
+      )
+    }
+
+    default :
+      return state;
+  }
+}
+```
+
+위와 같이 함수 `state`를 분리해 사용할 수 있게 한다.
+
+3. 기존 seTData(data)
+
+*수정 코드*
+```jsx
+// 최초 생성 
+dispatch({type : "INIT", data:initData});
+
+// 추가
+  const onCreate = useCallback(
+    (author, content, emotion) => {
+      // 신규 데이터를 가장 앞에 보여주기 위해
+      dispatch({
+        type:"CREATE",
+        data:{author,content,emotion, id:dataId.current}}
+        );
+
+      dataId.current ++; 
+    },
+    []  
+  ) 
+
+// 삭제
+  const onRemove = useCallback((targetId) => {
+    dispatch({type:"REMOVE", targetId});
+  }
+  ,[]
+  )
+
+// 수정
+  const onUpdate = useCallback((targetId,updateContent) => {
+
+    dispatch({type:"EDIT", targetId, updateContent});
+    },[]
+  );
+```
+
+이처럼 `useReducer`를 사용해 위와 같이 복잡한 상태 변화 로직을 분리해 처리할 수 있다.
+
+
+
+
+---
+## 자료출처
+- [인프런 - 한입리액트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8/news?gad_source=1&gclid=CjwKCAiApuCrBhAuEiwA8VJ6JqXDJLdwPCKfm1CpJ8y9foV_fBud8G_hRX8rebgBmdxIOycyFLNN5xoCMTgQAvD_BwE)
+
+
+
+

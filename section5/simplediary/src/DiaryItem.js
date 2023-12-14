@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 
 const DiaryItem = ({
     onUpdate,
@@ -8,10 +8,12 @@ const DiaryItem = ({
     created_date, 
     emotion, 
     id }) => {
-    console.log("Author::" , author);
 
-    const [isEdit, setIsEdit] = useState();
-    
+    useEffect(() => {
+        console.log(`${id}번 쨰 아이템 랜더!`);
+    })
+
+    const [isEdit, setIsEdit] = useState();    
     // 반전연산, isEdit가 true일때 수정할 수 있도록 처리한다.
     const toggleIsEdit = () => {
         setIsEdit(!isEdit);
@@ -21,8 +23,7 @@ const DiaryItem = ({
     const localContentInput = useRef("");
 
     const handleRemove = () => {
-        const fixId = (`${id}` === "0") ? 1 : `${id}`;
-        if(window.confirm(`${fixId}번째 일기를 정말 삭제하시겠습니까?`)){
+        if(window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)){
             onRemove(id);
         }
     }
@@ -31,16 +32,15 @@ const DiaryItem = ({
     const handleQuitEdit = () => {
         setIsEdit(false);
         setLocalContent(content);
-    }
+    } 
 
     const handleCompleteEdit = () => {
-        const fixId = (`${id}` === "0") ? 1 : `${id}`;
         if(localContent.length < 5) {
             localContentInput.current.focus();
             return;
         }
 
-        if(window.confirm(`${fixId}번째 일기를 수정하시겠습니까?`)){
+        if(window.confirm(`${id}번째 일기를 수정하시겠습니까?`)){
             setIsEdit(false);
             onUpdate(id,localContent);
         }
@@ -86,4 +86,4 @@ const DiaryItem = ({
     );
 }
 
-export default DiaryItem;
+export default React.memo(DiaryItem);
