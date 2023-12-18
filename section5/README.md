@@ -1,6 +1,6 @@
 # 5강 간단한 일기장 만들기
 
-이제부턴 React를 활용한 실습 위주 프로젝트이다.
+이제부턴 React를 활용한 실습 프로젝트이다.
 
 <br>
 
@@ -20,7 +20,7 @@
 
 ---
 
-### 2. React에서 DOM 조작하기
+## 2. React에서 DOM 조작하기
 
  ✔️  DOM(Document Object Model)
 문서 객체 모델은 XML이나 HTML 문서에 접근하기 위한 트리 형태의 인터페이스이다.
@@ -57,7 +57,7 @@ if(text.length < 2) authorInput.current.focus() // fouus 가능
 
 ---
 
-### 3 ~ 6 배열 CRUD
+## 3 ~ 6 배열 CRUD
 
 React에서 데이터를 랜더링하고 CRUD 하는 작업에 대해 실습하는 챕터
 
@@ -74,7 +74,7 @@ React에서 데이터를 랜더링하고 CRUD 하는 작업에 대해 실습하�
 
 </br>
 
-<U> App.js </U>
+<U>App.js</U>
 
 ``` js
 // 최상위 컴포넌트 App.js
@@ -110,13 +110,13 @@ React에서 데이터를 랜더링하고 CRUD 하는 작업에 대해 실습하�
 
 일기 데이터를 저장하므로 배열로 생성한다.
 
-ID 처리를 위해 useRef를 활용해 dataId라는 변수를 선언했고 이를 이용해 데이터의 id값을 관리하고 있다.
+ID 처리를 위해 `useRef`를 활용해 dataId라는 변수를 선언했고 이를 이용해 데이터의 id값을 관리하고 있다.
 
 신규 데이터를 가장 최신의 데이터로 보여주기 위해 setData 파라미터로 가장 먼저 넘겨주었고 기존 데이터와의 관리를 위해 `Spread` 연산자를 사용했다.
 
 </br>
 
-<U> DiaryEditor.js </U>
+<U>DiaryEditor.js</U>
 
 ``` jsx
 const DiaryEditor =  ({onCreate}) =>{
@@ -154,7 +154,7 @@ const handleSubmit = () => {
 ***데이터 삭제 프로세스***
 
 
-<U> App.js 예제코드 </U>
+<U>App.js</U>
 ``` jsx
   ...
   const onDelete = (targetId) => {
@@ -169,7 +169,7 @@ const handleSubmit = () => {
 </br>
 
 
-<U> DiaryItem 예제 코드</U>
+<U>DiaryItem 예제 코드</U>
 ``` jsx
         <button onClick={ () => {
             console.log(id);
@@ -201,7 +201,7 @@ const handleSubmit = () => {
  
 `DiaryItem`의 코드를 보면 페이지 하단에 위와 같이 삭제하기 버튼을 추가했다.
 
-일반적으로 삭제는 클릭과 동시에 이루어지는게 아닌, 사용자에게 한번 더 검증을 하는게 일반적이기에 `confirm` 을 하나 더 추가한후 App.js 에서 Props로 받은 `onDelete` state에 삭제할 게시글의 id를 넘겨줬다.
+일반적으로 삭제는 클릭과 동시에 이루어지는게 아닌, 사용자에게 한번 더 검증을 하는게 일반적이기에 `confirm` 을 추가한후 App.js 에서 `Props`로 받은 `onDelete` state에 삭제할 게시글의 id를 넘겨줬다.
 
 </br>
 
@@ -213,14 +213,15 @@ const handleSubmit = () => {
 
 4. 배열의 내장함수 `filter` 를 이용해 파라미터로 받은 data 배열을 제외한 신규 배열 정보를 다시 setData 상태로 업데이트 시킨다.
 
+</br>
 
 ---
 
-*** 데이터 수정 프로세스 ***
+***데이터 수정 프로세스***
 
 데이터는 위에서 아래로, 이벤트는 아래에서 위로를 생각해야한다.
 
-<U> App.jsx </U>
+<U>App.jsx</U>
 
 ```jsx
   const onUpdate = (targetId,updateContent) => {
@@ -253,7 +254,7 @@ const handleSubmit = () => {
 단순히 배열의 각 요소를 수정을 하려 한다면 `map` 을 사용하고, 특정 조건을 만족하는 요소를 걸러내고자 한다면 `filter`를 사용한다.
 
 
-<U> DiaryList.js </U>
+<U>DiaryList.js</U>
 
 ```jsx
         <div className ="DiaryList">
@@ -351,7 +352,7 @@ const handleSubmit = () => {
 
 ---
 
-## 7.React Lifecycle 제어하기
+## 7. React Lifecycle 제어하기
 
 ✔️ Lifecycle?
 
@@ -434,7 +435,7 @@ useEffect (() => {
 </br>
 
 ---
-## 8.React에서 API 호출하기
+## 8. React에서 API 호출하기
 
 ***<U> API 호출 예제</U>***
 
@@ -496,6 +497,8 @@ getDiaryAnalysis is not a function
 TypeError: getDiaryAnalysis is not a function
 ```
 
+</br>
+
 `useMemo`로 함수를 감싸고 dependency array를 전달하면 더이상 전달한 함수는 더이상 함수가 아니다.
 
 던지고 나면 응답값으로 콜백함수가 아닌 값을 전달받게 된다.
@@ -531,6 +534,7 @@ const CountView = React.memo(({ count }) => {
 
 하지만 `React.memo`를 사용하면 고차 컴포넌트로 반환받게 된다. 고차 컴포넌트로 바뀜으로써 `props`의 변화에만 영향을 받게 할 수 있게한다.
 
+</br>
 
 **객체의 비교**
 ```jsx
@@ -572,7 +576,7 @@ obj는 객체이고 자바스크립트에서 객체 비교는 해당 객체가 �
 
 ---
 
-## 12.  useCallBack
+## 12. useCallBack
 
 `메모이제이션`된 콜백 함수를 반환 해주는 리액트의 기능(값이 아닌 함수 반환)
 
@@ -598,6 +602,8 @@ App.js에선 전달받은 파라미터로 신규 데이터를 추가할 수 있�
 이를 최적화하기 위해선 `useCallBack`을 사용할 수 있고 이전에 처리한 `useMemo` 를 사용할 수 없는 이유는 이 녀석은 함수가 아닌 값을 반환하기 때문에
 
 원본 그대로 하위 컴포넌트로 보내 처리하기 위해선 값이 아니라 콜백 함수 그대로 사용해야한다.
+
+</br>
 
 1. 최적화의 시작은 export component를 `export React.memo(Componet)` 
 
@@ -631,12 +637,15 @@ App.js에선 전달받은 파라미터로 신규 데이터를 추가할 수 있�
 
 Hook은 함수 컴포넌트에서 React state와 생명주기(lifeCycle feature)를 연동할 수 있게 해주는 함수
 
+</br>
+
 ***사용 이유***
 
 useReducer를 사용하면 복잡하고 긴 상태 변화 로직을 클래스와 분리해 바깥에서 이를 처리할 수 있게 해준다.
 
 함수안에 코드가 긴것은 결코 좋은 현상이 아님.
 
+</br>
 
 ***사용 방법***
 
@@ -645,6 +654,8 @@ useReducer를 사용하면 복잡하고 긴 상태 변화 로직을 클래스와
 구조 분해 할당으로 받게되는 데이터와 실제 상태변화 일으키는 dispatch 함수
 
 2. useReducer
+
+</br>
 
 *예제 코드*
 
@@ -681,6 +692,8 @@ const reducer = (state,action) => {
 ```
 
 위와 같이 함수 `state`를 분리해 사용할 수 있게 한다.
+
+</br>
 
 3. 기존 seTData(data)
 
@@ -721,6 +734,7 @@ dispatch({type : "INIT", data:initData});
 
 이처럼 `useReducer`를 사용해 위와 같이 복잡한 상태 변화 로직을 분리해 처리할 수 있다.
 
+</br>
 
 ---
 
@@ -881,10 +895,6 @@ export const DiaryDispatchContext = React.createContext();
 - 쉽지 않다.
 
 </br>
-
-
-
-
 
 ---
 ## 자료출처
