@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState, useReducer } from 'react';
+import React, { useCallback, useEffect, useRef, useMemo, useReducer } from 'react';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
 
@@ -75,6 +75,8 @@ const reducer = (state,action) => {
 // 내보내기
 export const DiaryStateContext = React.createContext();
 
+export const DiaryDispatchContext = React.createContext();
+
 function App() {
   // DATA에는 일기 데이터 배열을 저장할것임
   const [data,dispatch] = useReducer(reducer, []);
@@ -129,17 +131,24 @@ function App() {
     },[]
   );
 
+  const memoizedDispatches = useMemo(() => {
+    return {onCreate,onRemove,onUpdate}
+  },[]);
+
+
   return (
     <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value ={memoizedDispatches}>
     <div className="App">
       {/* <OptimizeTest/> */}
-      <DiaryEditor onCreate={onCreate}/>
+      <DiaryEditor/>
       {/* <div> 전체일기 : {data.length} </div>
       <div> 기분 좋은일기 개수 : {goodCount}</div>
       <div> 기분 나쁜일기 개수 : {badCount}</div>
       <div> 기분 좋은일기 비율 : {goodRatio}</div> */}
-      <DiaryList onUpdate={onUpdate} onRemove={onRemove} />
+      <DiaryList/>
     </div>
+    </DiaryDispatchContext.Provider> 
     </DiaryStateContext.Provider>
   );
 }

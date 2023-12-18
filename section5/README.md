@@ -686,6 +686,7 @@ const reducer = (state,action) => {
 
 *수정 코드*
 ```jsx
+
 // 최초 생성 
 dispatch({type : "INIT", data:initData});
 
@@ -721,12 +722,174 @@ dispatch({type : "INIT", data:initData});
 이처럼 `useReducer`를 사용해 위와 같이 복잡한 상태 변화 로직을 분리해 처리할 수 있다.
 
 
+---
+
+## 14. Context
+
+컴포넌트 트리에 데이터를 공급하는 방법
+
+
+만약 우리가 최상단에 있는 함수를 하위 자손에 넘겨주기 위해선 불필요하게 하위 자식에 넘겨주고 그 자식이 자손에게 넘겨줘야하는
+
+소위 말하는 Props Driling 현상이 있었다.
+
+</br>
+
+react에선 이러한 데이터를 전체적으로 관리해주는 api를 제공하는데 그 녀석이 바로 `Context Provider` 이다.
+
+```js
+const MyContext = React.createContext(defaultValue);
+
+// Context Provider를 통한 데이터 공급
+<MyContext.Provider value={전역으로 전달하고자하는 값}>
+  {/* 이 Context안에 위치할 자식 컴포넌트들 */}
+</MyContext.Provider>
+```
+
+위 처럼 react에 createContext를 사용해 전역적으로 사용할 수 있는 `MyContext` 라는 객체를 생성할 수 있고
+
+이 안에 있는 `Provider` 를 활용해 자식으로 존재하기만 하면 모든 컴포넌트는 이 프로바이더가 전달하는 값을 사용할 수 있다. 
+
+</br>
+
+
+``` jsx
+// export
+export const DiaryStateContext = React.createContext();
+
+// 자식,자손에서 import
+import { DiaryStateContext } from './App.js';
+
+```
+
+외부(자식,자손)에서 이 `Context` 에 접근하기 위해선 `export`를 해야한다.
+
+export const로 내보내기가 된 컴포넌트들은 비구조화 할당을 통해서만 import 할 수 있다.
+
+</br>
+
+실제 export 할 데이터를 담는 방법은 아래와 같이 한다.
+
+``` jsx
+  <DiaryStateContext.Provider value = {data}>
+  <DiaryList onEdit = {onEdit} onRemove={onRemove} diaryList />
+  </DiaryStateContext.Provider>
+```
+
+위와 같이 하면 `diaryList` 에선 `data`를 `Props`를 받을 필요가 없다.
+
+`DiaryStateContext`에 데이터가 담겨 있기 때문이고 이를 접근해 가져오기만 하면 되기 때문이다.
+
+``` jsx
+import { useContext } from 'react';
+import { DiaryStateContext } from './App.js';
+```
+
+우선  자식 컴포넌트가 컨텍스트의 값을 사용하려면, 해당 컨텍스트를 자식 컴포넌트에서 `UseContext` 훅을 사용해 가져와야한다.
+
+실제 `DiaryList` 의 컴포넌트의 hooks 부분에 Context 내부에 실제 Data가 담겨 있다.
+
+그러므로 위 2개를 `import`하고 데이터 랜더링은 아래와 같이 한다.
+
+</br>
+
+``` jsx
+const list = useContext(DiaryStateContext);
+
+{list.map((it) => {
+  <div>
+  <DiaryItem key={it.id} {...it} />
+  </div>
+})}
+
+```
+위와 같이 `useContext(DiaryStateContext)` 를 사용하면 일반 `Props` 로 전달받은것과 동일하게 사용할 수 있다.
+
+
+</br>
+
+
+*** Props Driling ***
+
+앞서 진행했던 작업은 상위 컴포넌트가 자식에게 `Props` 에서 `Context` 로 접근해 데이터를 랜더링 하는 작업이었다.
+
+그렇다면 상위 컴포넌트의 `DiaryStateContext`에 모든 `Props` 를 넘겨 접근해서 사용하게 하면 될까?
+
+
+</br>
+
+결론은 그렇지 않다. 
+
+왜냐하면 Provider는 컴포넌트이기 때문에 여러 props를 넘겨주게 되면 데이터 state가 바뀔때마다 리랜더링이 발생하며
+
+앞서 작업했던 최적화가 의미가 없어지게 된다.
+
+그러므로 이럴 땐 컨텍스트를 중첩으로 사용해 처리해야한다.
+
+하나의 `Context` 는 하나의 `State` 전달을 이해 사용해야한다.
+
+</br>
+
+``` jsx
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
+  ...  
+  const memoizedDispatches = useMemo(() => {
+    return {onCreate,onRemove,onUpdate}
+  },[]);
+
+  return (
+    <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value ={memoizedDispatches}>
+    <div className="App">
+      {/* <OptimizeTest/> */}
+      <DiaryEditor onCreate={onCreate}/>
+      {/* <div> 전체일기 : {data.length} </div>
+      <div> 기분 좋은일기 개수 : {goodCount}</div>
+      <div> 기분 나쁜일기 개수 : {badCount}</div>
+      <div> 기분 좋은일기 비율 : {goodRatio}</div> */}
+      <DiaryList onUpdate={onUpdate} onRemove={onRemove} />
+    </div>
+    </DiaryDispatchContext.Provider> 
+    </DiaryStateContext.Provider>
+  );
+
+```
+
+일반 함수에 데이터를 담아 value로 넘기는것이 아닌 `useMemo` 를 사용하는 이유는 넘겨주는 상위 컴포넌트의 재생성이 될 떄마다
+
+하위 객체(onCrate,onRemove...)도 다시 재생성이 된다. 
+
+그렇기 때문에 `useMemo` 를 활용해서 재생성 되지 않게 객체로 묶어 주고 `Provider`의 value로 넘겨줘야한다.
+
+</br>
+
+```jsx
+    const {onRemove} = useContext(DiaryDispatchContext);
+    const {onUpdate} = useContext(DiaryDispatchContext);
+```
+
+동일하게 import 해서 기존 컴포넌트의 기능을 대체할 수 있다.
+
+이렇게 하면 `Props Driling` 현상을 해결하며 기능을 정상적으로 수행하도록 할 수 있다.
+
+
+</br>
+
+***정리***
+- 쉽지 않다.
+
+</br>
+
+
+
 
 
 ---
 ## 자료출처
 - [인프런 - 한입리액트](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%EB%A6%AC%EC%95%A1%ED%8A%B8/news?gad_source=1&gclid=CjwKCAiApuCrBhAuEiwA8VJ6JqXDJLdwPCKfm1CpJ8y9foV_fBud8G_hRX8rebgBmdxIOycyFLNN5xoCMTgQAvD_BwE)
-
+ 
 
 
 

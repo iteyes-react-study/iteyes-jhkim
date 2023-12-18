@@ -1,7 +1,11 @@
-import React, {useEffect, useRef, useState } from "react";
+import React, {useContext, useEffect, useRef, useState } from "react";
 import './App.css';
+import { DiaryDispatchContext } from "./App";
 
-const DiaryEditor =  ({onCreate}) =>{
+const DiaryEditor =  () =>{
+
+    // 넘겨주는 데이터는 함수 3개로 이루어진 객체이기 때문에 비구조화 할당으로 데이터를 가져와야 한다.
+    const {onCreate} = useContext(DiaryDispatchContext);
 
     const authorInput = useRef();
     const contentInput = useRef();

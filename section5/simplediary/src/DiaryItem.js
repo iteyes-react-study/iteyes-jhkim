@@ -1,8 +1,7 @@
-import React, {useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState, useContext } from "react";
+import { DiaryDispatchContext} from './App.js';
 
 const DiaryItem = ({
-    onUpdate,
-    onRemove, 
     author, 
     content, 
     created_date, 
@@ -12,6 +11,9 @@ const DiaryItem = ({
     useEffect(() => {
         console.log(`${id}번 쨰 아이템 랜더!`);
     })
+
+    const {onRemove} = useContext(DiaryDispatchContext);
+    const {onUpdate} = useContext(DiaryDispatchContext);
 
     const [isEdit, setIsEdit] = useState();    
     // 반전연산, isEdit가 true일때 수정할 수 있도록 처리한다.
