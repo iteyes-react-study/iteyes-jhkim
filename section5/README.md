@@ -183,7 +183,7 @@ const handleSubmit = () => {
 
 </br>
 
-<U> DiaryList 코드 </U>
+<U>DiaryList 코드</U>
 ``` jsx
     return (
         // 데이터의 고유한 id를 설정하지 않으면 에러가 발생한다.
@@ -822,8 +822,6 @@ const list = useContext(DiaryStateContext);
 
 </br>
 
-
-*** Props Driling ***
 
 앞서 진행했던 작업은 상위 컴포넌트가 자식에게 `Props` 에서 `Context` 로 접근해 데이터를 랜더링 하는 작업이었다.
 
