@@ -209,3 +209,26 @@ const Edit = () => {
 
 **정리**
 - 상세 페이지에선 `Path Variable` , 목록 페이지에선 `Query String`, 기타 페이지 이동시엔 `useNavigate` 를 사용하면 유용할듯 하다. 
+
+
+---
+
+## 프로젝트 기초 공사 
+
+```jsx
+  // 클래스 타입으로 정의되어 있찌 않은 타입이 Props로 오는것을 상수로 관리해 방지한다.
+  const btnType = ["positive","negative"].includes(type) ? type : "default";
+
+  // button css 를 관리하는 방법
+  <button className={["MyButton", `MyButton_${btnType}`].join(" ")} onClick={onClick}>
+      {text}
+  </button>
+```
+
+Props로 전달받은 type정보가 css로 지정한 상수값에 존재하지 않으면 default로 처리 하는 방법
+
+
+
+
+
+

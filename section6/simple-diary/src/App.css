@@ -1,3 +1,66 @@
 .App {
   padding: 20px;
 }
+
+
+/* MyButton */
+
+.MyButton {
+  cursor: pointer;
+  border-radius: 5px;
+  
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.MyButton_default {
+  background-color: #ececec;
+  color: black;
+}
+
+.MyButton_positive {
+  background-color: #64c964;
+  color: white;
+}
+
+.MyButton_negative {
+  background-color: #fd565f;
+  color:white;
+}
+
+/* Header */
+/* display : flex 세로가 아닌 가로축을 기준으로 모양을 바꿔준다. */
+header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
+  display: flex; 
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+header > div {
+  display: flex;
+}
+
+header .head_text {
+  width: 50px;
+  font-size: 25px;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+header .head_btn_left {
+  width: 25%;
+  justify-content: start;
+}
+
+header .head_btn_right {
+  width: 25%;
+  justify-content: end;
+}
